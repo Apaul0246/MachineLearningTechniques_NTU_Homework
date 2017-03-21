@@ -32,8 +32,8 @@ def hard_margin_linear_SVM(x,y):
 	p = np.zeros(d+1)[:,np.newaxis]
 	A = y*np.insert(x,0,1,axis = 1)
 	c = np.ones(N)[:,np.newaxis]
-	sol = opt.solvers.qp(opt.matrix(Q,tc='d'),opt.matrix(p,tc='d'),opt.matrix(-A,tc='d'),opt.matrix(-c,tc='d'))
-	return sol['x']
+	ans = opt.solvers.qp(opt.matrix(Q,tc='d'),opt.matrix(p,tc='d'),opt.matrix(-A,tc='d'),opt.matrix(-c,tc='d'))
+	return ans['x']
 
 '''
 Hard margin kernel SVM
