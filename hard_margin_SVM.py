@@ -1,5 +1,6 @@
 import numpy as np
 import cvxopt as opt
+import matplotlib.pyplot as plt
 
 '''
 Description of QP solver - cvxopt
@@ -80,7 +81,7 @@ def kernel(xn,xm):
 Answer to Question 3: according to complementary slackness, sv with alpha>0
 Answer to Question 4: hypothesis g(x) = sign(decision boundary)
 '''
-if (0):
+if (1):
 	x = np.array([[1,0],[0,1],[0,-1],[-1,0],[0,2],[0,-2],[-2,0]])
 	y = np.array([-1,-1,-1,1,1,1,1])[:,np.newaxis]
 	#calculate alpha
@@ -92,3 +93,21 @@ if (0):
 
 	print alpha,sv
 	print b 
+
+	# an indirect way to plot decision boundary.
+	if(1):
+		import itertools
+		x1_co = np.linspace(-3,3,25,endpoint = True)
+		x_co = list(itertools.product(x1_co,repeat=2))
+
+		y_co = []
+		for d in range(len(x_co)):
+			y_cod = np.sign(np.sum(alpha[i]*y[i]*kernel(x[i],x_co[d]) for i in range(len(alpha)))+b)
+			y_co.append(y_cod)
+
+		for i in range(len(y_co)):
+			if y_co[i] == 1:
+				plt.plot(x_co[i][0],x_co[i][1],'r.')
+			else:
+				plt.plot(x_co[i][0],x_co[i][1],'b.')
+		plt.show()
