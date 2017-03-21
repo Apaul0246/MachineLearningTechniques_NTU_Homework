@@ -37,6 +37,39 @@ def hard_margin_linear_SVM(x,y):
 	return ans['x']
 
 '''
+Answer to Question 2: plot boundary 
+'''
+if (1):
+	x = np.array([[1,0],[0,1],[0,-1],[-1,0],[0,2],[0,-2],[-2,0]])
+	
+	def transform(x1,x2):
+		x_t1 = x2**2-2*x1+3
+		x_t2 = x1**2-2*x2-3
+		return x_t1,x_t2
+
+	for i in range(len(x)):
+		x[i]= transform(x[i][0],x[i][1])
+	y = np.array([-1,-1,-1,1,1,1,1])[:,np.newaxis]
+	co = hard_margin_linear_SVM(x,y)
+
+	if(1):
+		import itertools
+		x1_co = np.linspace(-3,3,25,endpoint = True)
+		x_co = list(itertools.product(x1_co,repeat=2))
+
+		y_co = []
+		for d in range(len(x_co)):
+			y_cod = np.sign(co[0]+co[1]*transform(x_co[d][0],x_co[d][1])[0]+co[2]*transform(x_co[d][0],x_co[d][1])[1])
+			y_co.append(y_cod)
+
+		for i in range(len(y_co)):
+			if y_co[i] == 1:
+				plt.plot(x_co[i][0],x_co[i][1],'y.')
+			else:
+				plt.plot(x_co[i][0],x_co[i][1],'b.')
+		plt.show()
+
+'''
 Hard margin kernel SVM
 ++++++++++++++++++++++
 x,y: array
@@ -81,7 +114,7 @@ def kernel(xn,xm):
 Answer to Question 3: according to complementary slackness, sv with alpha>0
 Answer to Question 4: hypothesis g(x) = sign(decision boundary)
 '''
-if (1):
+if (0):
 	x = np.array([[1,0],[0,1],[0,-1],[-1,0],[0,2],[0,-2],[-2,0]])
 	y = np.array([-1,-1,-1,1,1,1,1])[:,np.newaxis]
 	#calculate alpha
@@ -95,7 +128,7 @@ if (1):
 	print b 
 
 	# an indirect way to plot decision boundary.
-	if(1):
+	if(0):
 		import itertools
 		x1_co = np.linspace(-3,3,25,endpoint = True)
 		x_co = list(itertools.product(x1_co,repeat=2))
@@ -107,7 +140,7 @@ if (1):
 
 		for i in range(len(y_co)):
 			if y_co[i] == 1:
-				plt.plot(x_co[i][0],x_co[i][1],'r.')
+				plt.plot(x_co[i][0],x_co[i][1],'y.')
 			else:
 				plt.plot(x_co[i][0],x_co[i][1],'b.')
 		plt.show()
