@@ -37,9 +37,9 @@ def hard_margin_linear_SVM(x,y):
 	return ans['x']
 
 '''
-Answer to Question 2: plot boundary 
+Answer to Question 2: plot decision boundary 
 '''
-if (1):
+if (0):
 	x = np.array([[1,0],[0,1],[0,-1],[-1,0],[0,2],[0,-2],[-2,0]])
 	
 	def transform(x1,x2):
@@ -52,7 +52,7 @@ if (1):
 	y = np.array([-1,-1,-1,1,1,1,1])[:,np.newaxis]
 	co = hard_margin_linear_SVM(x,y)
 
-	if(1):
+	if(0):
 		import itertools
 		x1_co = np.linspace(-3,3,25,endpoint = True)
 		x_co = list(itertools.product(x1_co,repeat=2))
