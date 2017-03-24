@@ -144,3 +144,38 @@ if (0):
 			else:
 				plt.plot(x_co[i][0],x_co[i][1],'b.')
 		plt.show()
+
+'''
+Another way to solve Question 4: 
+set big cost value C in soft-margin-SVM 
+(C is the trade-off of violations and big margin)
+Reference: http://blog.csdn.net/qian1122221/article/details/50130093
+'''
+'''
+recommended package LIBSVM was used for analysis
+Reference: Chih-Chung Chang and Chih-Jen Lin, LIBSVM : a library for support vector machines. ACM Transactions on Intelligent Systems and Technology, 2:27:1--27:27, 2011. Software available at http://www.csie.ntu.edu.tw/~cjlin/libsvm
+
+Notations:
+-t kernel_type 1 -- polynomial: (gamma*u'*v + coef0)^degree
+-g gamma
+-r coef0
+-d degree
+-s SVM type 0 -- C-SVC (multi-class classification)
+'''
+
+if (0):
+	import sys
+	sys.path.append('C:\Users\user\OneDrive\Code\libsvm-3.22\python')
+	from svmutil import *
+
+	y, x = [-1,-1,-1,1,1,1,1], [{0:1.0, 1:0.0}, {0:0.0, 1:1.0}, {0:0.0, 1:-1.0}, {0:-1.0, 1:0.0}, {0:0.0, 1:2.0}, {0:0.0, 1:-2.0}, {0:-2.0, 1:0.0}]
+	prob  = svm_problem(y, x)
+	param = svm_parameter('-t 1 -g 1 -r 1 -d 2 -s 0 -c 99999')
+	m = svm_train(prob, param)
+
+	support_vector_coefficients = m.get_sv_coef()
+	support_vectors = m.get_SV()
+	sv_indices = m.get_sv_indices()
+	print sv_indices
+	print support_vectors
+	print support_vector_coefficients
