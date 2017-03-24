@@ -148,11 +148,11 @@ if (0):
 '''
 Another way to solve Question 4: 
 set big cost value C in soft-margin-SVM 
-(C is the trade-off of violations and big margin)
+(C is the trade-off between violations and big margin)
 Reference: http://blog.csdn.net/qian1122221/article/details/50130093
 '''
 '''
-recommended package LIBSVM was used for analysis
+package LIBSVM was used for analysis
 Reference: Chih-Chung Chang and Chih-Jen Lin, LIBSVM : a library for support vector machines. ACM Transactions on Intelligent Systems and Technology, 2:27:1--27:27, 2011. Software available at http://www.csie.ntu.edu.tw/~cjlin/libsvm
 
 Notations:
